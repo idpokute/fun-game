@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { initGame, restartGame } from "../actions/game";
-import { ColorBox } from "./globals";
+import { initGame } from "../actions/game";
 
 import Cell from "./Cell";
 import Tool from "./Tool";
@@ -30,7 +29,6 @@ export default function Stage() {
   }, [game.gameOver]);
 
   return (
-    // <DndProvider backend={HTML5Backend}>
     <div>
       {tiles.map((tiles, index) => {
         return (
@@ -50,13 +48,7 @@ export default function Stage() {
                   cellType={tile.cellType}
                   color={tile.color}
                   closest={isClosest}
-                >
-                  {/* {Object.keys(tile).map((key, i) => (
-                    <span key={i}>
-                      {key}: {tile[key]}
-                    </span>
-                  ))} */}
-                </Cell>
+                ></Cell>
               );
             })}
           </div>
@@ -66,6 +58,5 @@ export default function Stage() {
       Debug Tools
       <Tool />
     </div>
-    // </DndProvider>
   );
 }

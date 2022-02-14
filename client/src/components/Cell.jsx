@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import gameSlice from "../reducers/game";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -31,7 +31,7 @@ export default function Cell({ cellType, row, col, color, closest }) {
     e.preventDefault();
   };
   const onDragStart = (e) => {
-    if (game.step < 3) {
+    if (game.step < defaultColors.length) {
       e.preventDefault();
       return;
     }
@@ -40,7 +40,7 @@ export default function Cell({ cellType, row, col, color, closest }) {
     dispatch(gameSlice.actions.setSelectedColor(color));
   };
 
-  const onDrop = async (e) => {
+  const onDrop = (e) => {
     console.log("called onDrop", e);
     const { row, col } = e.target.dataset;
     setColor(row, col, game.selectedColor);
@@ -49,12 +49,10 @@ export default function Cell({ cellType, row, col, color, closest }) {
   const setColor = (r, c, color) => {
     if (game.gameOver === -1 || game.gameOver === 1) return;
     dispatch(gameSlice.actions.setSource(r, c, color));
-
-    dispatch(gameSlice.actions.checkGameOver());
   };
 
   const hClickCell = () => {
-    if (game.step < 3) {
+    if (game.step < defaultColors.length) {
       let c = defaultColors[game.step];
       if (c) {
         setColor(row, col, c);

@@ -41,16 +41,6 @@ const gameSlice = createSlice({
     setSelectedColor(state, action) {
       state.selectedColor = action.payload;
     },
-    checkGameOver(state) {
-      if (state.diff <= 0.1) {
-        state.gameOver = 1;
-      } else {
-        if (state.movesLeft < 1) {
-          state.gameOver = -1;
-        }
-      }
-    },
-
     setSource: {
       reducer(state, action) {
         const { row, col, color } = action.payload;
@@ -197,6 +187,14 @@ const gameSlice = createSlice({
         let left = state.movesLeft;
         left--;
         state.movesLeft = left;
+
+        if (state.diff <= 0.1) {
+          state.gameOver = 1;
+        } else {
+          if (state.movesLeft < 1) {
+            state.gameOver = -1;
+          }
+        }
       },
       prepare(row, col, color) {
         row = parseInt(row);
