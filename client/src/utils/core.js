@@ -2,9 +2,10 @@ export const getDiffColors = (color1, color2) => {
   const [r1, g1, b1] = color1;
   const [r2, g2, b2] = color2;
 
+  // (1 / 255) * (1 / Math.sqrt(3)) = 0.002264118702704415
+
   return (
-    (1 / 255) *
-    (1 / Math.sqrt(3)) *
+    0.002264118702704415 *
     Math.sqrt(
       Math.pow(r1 - r2, 2) + Math.pow(g1 - g2, 2) + Math.pow(b1 - b2, 2)
     )
